@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #07111f;
+  --panel: #0d1b2d;
+  --surface: #10243a;
+  --ivory: #f7efda;
+  --muted: #9fb0bf;
+  --saffron: #f5b84b;
+  --teal: #53d6b5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ink);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family:
+    "Aptos",
+    "Segoe UI",
+    system-ui,
+    sans-serif;
+  color: var(--ivory);
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(245, 184, 75, 0.35);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(247, 239, 218, 0.16);
+  border: 2px solid var(--surface);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
