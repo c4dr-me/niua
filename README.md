@@ -6,6 +6,8 @@ React + Vite dashboard for the NUDM UPYOG intern assessment. The app loads `prop
 
 ### Dashboard Overview
 
+Live: https://niua-beige.vercel.app
+
 ![UPYOG Property Tax Analytics Dashboard](public/dashboard.png)
 
 ### Tenant Filter, Highlighted Charts and AI Chat
