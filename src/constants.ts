@@ -27,3 +27,15 @@ export const STARTER_QUESTIONS = [
   "Which city has the most pending properties?",
   "Compare total registrations between Pune and Jaipur.",
 ];
+
+export const STARTER_QUESTION_LABELS: Record<string, string> = {
+  "Which city has the highest total collection?": "Top collection city",
+  "How many properties are rejected in Mumbai?": "Mumbai rejections",
+  "What percentage of Delhi properties are approved?": "Delhi approval rate",
+  "Which city has the most pending properties?": "Most pending city",
+  "Compare total registrations between Pune and Jaipur.": "Pune vs Jaipur",
+};
+
+export const INLINE_BULLET_AFTER_COLON = /:\s+\*\s+/g;
+export const INLINE_BULLET_ITEM = /\s+\*\s+([A-Za-z][^:*]{1,60}:)/g;
+export const INLINE_NUMBERED_ITEM = /\s+(\d+\.)\s+/g;

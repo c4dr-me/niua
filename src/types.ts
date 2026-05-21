@@ -88,3 +88,19 @@ export interface ChatAssistantProps {
   dataContext: string;
   records: PropertyRecord[];
 }
+
+export interface MarkdownMessageProps {
+  content: string;
+}
+
+export interface CollectionTooltipProps {
+  active?: boolean;
+  label?: string;
+  payload?: Array<{ value?: number }>;
+}
+
+export interface StatusTooltipProps {
+  active?: boolean;
+  label?: string;
+  payload?: Array<{ name?: string; value?: number; color?: string }>;
+}

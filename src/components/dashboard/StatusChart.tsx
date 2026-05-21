@@ -9,15 +9,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import type { StatusChartProps } from "../../types";
+import type { StatusChartProps, StatusTooltipProps } from "../../types";
 import { ALL_CITIES } from "../../constants";
 import { formatInteger } from "../../utils/formatters";
-
-interface StatusTooltipProps {
-  active?: boolean;
-  label?: string;
-  payload?: Array<{ name?: string; value?: number; color?: string }>;
-}
 
 function StatusTooltip({ active, label, payload }: StatusTooltipProps) {
   if (!active || !payload?.length) {

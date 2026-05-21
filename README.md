@@ -6,8 +6,6 @@ React + Vite dashboard for the NUDM UPYOG intern assessment. The app loads `prop
 
 ### Dashboard Overview
 
-Live: https://niua-beige.vercel.app
-
 ![UPYOG Property Tax Analytics Dashboard](public/dashboard.png)
 
 ### Tenant Filter, Highlighted Charts and AI Chat
@@ -81,13 +79,13 @@ bun run test:e2e
 
 ## Gemini Notes
 
-This assessment uses Gemini directly from the Vite frontend for demo simplicity. In production, API calls should go through a backend proxy so secrets are never exposed to the browser.
+This assessment calls Gemini directly from the Vite frontend for demo simplicity. In production, move Gemini calls behind a backend or serverless proxy so the API key is not exposed in browser JavaScript or Network requests.
 
 Gemini model names and quotas can change. The default model is configurable through `VITE_GEMINI_MODEL`, and request limits should be confirmed in Google AI Studio for the active project.
 
 ## Sample Questions
 
-- Which city has the highest total collection?
+- Give me a short insight summary of property tax performance across all tenants.
 - How many properties are rejected in Mumbai?
 - What percentage of Delhi properties are approved?
 - Which city has the most pending properties?

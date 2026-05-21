@@ -9,15 +9,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import type { CollectionChartProps } from "../../types";
+import type { CollectionChartProps, CollectionTooltipProps } from "../../types";
 import { ALL_CITIES } from "../../constants";
 import { formatCompactCurrency, formatCurrency } from "../../utils/formatters";
-
-interface CollectionTooltipProps {
-  active?: boolean;
-  label?: string;
-  payload?: Array<{ value?: number }>;
-}
 
 function CollectionTooltip({ active, label, payload }: CollectionTooltipProps) {
   if (!active || !payload?.length) {

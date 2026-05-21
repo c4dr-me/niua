@@ -1,35 +1,24 @@
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import {
+  FormEvent,
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Bot, KeyRound, Loader2, Send, Sparkles, UserRound } from "lucide-react";
 import clsx from "clsx";
-import { STARTER_QUESTIONS } from "../../constants";
+import { STARTER_QUESTION_LABELS, STARTER_QUESTIONS } from "../../constants";
 import type { ChatAssistantProps, ChatMessage } from "../../types";
 import { askGemini, hasGeminiKey } from "../../services/gemini";
 import { answerFromLocalAnalytics } from "../../utils/analytics";
-import { MarkdownMessage } from "./MarkdownMessage";
-
-const getPromptLabel = (question: string) => {
-  if (question.includes("highest total collection")) {
-    return "Top collection city";
-  }
-
-  if (question.includes("rejected in Mumbai")) {
-    return "Mumbai rejections";
-  }
-
-  if (question.includes("Delhi properties are approved")) {
-    return "Delhi approval rate";
-  }
-
-  if (question.includes("most pending")) {
-    return "Most pending city";
-  }
-
-  if (question.includes("Pune and Jaipur")) {
-    return "Pune vs Jaipur";
-  }
-
-  return question;
-};
+const MarkdownMessage = lazy(() =>
+  import("./MarkdownMessage").then((module) => ({
+    default: module.MarkdownMessage,
+  })),
+);
 
 export function ChatAssistant({ dataContext, records }: ChatAssistantProps) {
   const [input, setInput] = useState("");
@@ -56,7 +45,7 @@ export function ChatAssistant({ dataContext, records }: ChatAssistantProps) {
     messagesEndRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
   }, [messages, isLoading]);
 
-  const submitQuestion = async (question: string) => {
+  const submitQuestion = useCallback(async (question: string) => {
     const trimmed = question.trim();
     if (!trimmed || isLoading) {
       return;
@@ -97,12 +86,12 @@ export function ChatAssistant({ dataContext, records }: ChatAssistantProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [dataContext, isLoading, records]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     void submitQuestion(input);
-  };
+  }, [input, submitQuestion]);
 
   return (
     <aside className="flex h-[620px] min-h-0 min-w-0 flex-col overflow-hidden rounded-sm border border-white/10 bg-[var(--surface)] shadow-xl shadow-black/15 xl:h-[887px]">
@@ -142,7 +131,7 @@ export function ChatAssistant({ dataContext, records }: ChatAssistantProps) {
               title={question}
               onClick={() => void submitQuestion(question)}
             >
-              {getPromptLabel(question)}
+              {STARTER_QUESTION_LABELS[question] ?? question}
             </button>
           ))}
         </div>
@@ -171,7 +160,9 @@ export function ChatAssistant({ dataContext, records }: ChatAssistantProps) {
               )}
             >
               {message.role === "assistant" ? (
-                <MarkdownMessage content={message.content} />
+                <Suspense fallback={<span>{message.content}</span>}>
+                  <MarkdownMessage content={message.content} />
+                </Suspense>
               ) : (
                 message.content
               )}
